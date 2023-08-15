@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache" />
     <link rel="stylesheet" href="{% static 'account/css/style.css' %}">
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -19,15 +20,17 @@
                 <a href="{% url 'logout' %}">Выйти</a>
             {% else %}
                 <a href="{% url 'login' %}">Войти</a>
-                <a href="#">Регистрация</a>
+                <a href="{% url 'registration' %}">Регистрация</a>
             {% endif %}
         </div>
     </div>
     <div class="sidebar">
 
     </div>
-    {% block content %}
-    {% endblock %}
+    <div class="main">
+        {% block content %}
+        {% endblock %}
+    </div>
     <div class="footer">
         <span class="footer-text">Все права поражены.</span>
     </div>

@@ -33,7 +33,17 @@ body {
     color: red;
 }
 
-a {
+.msg-done {
+    color: green;
+}
+
+.main a {
+    text-decoration: none;
+    border: rgb(255, 123, 0) solid 1px;
+}
+
+.navbar a {
     text-decoration: none;
     border: white solid 1px;
 }
+

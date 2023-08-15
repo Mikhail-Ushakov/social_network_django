@@ -14,4 +14,6 @@
     <input type="hidden" name="hstext" value="{{ next }}">
     <input type="submit" value="Войти">
 </form>
+<a href="{% url 'pass-reset' %}">Забыли пароль?</a>
+Еще нет акка? <a href="{% url 'registration' %}">Зарегистрируйся!</a>
 {% endblock %}

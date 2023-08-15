@@ -3,5 +3,8 @@
 {% block title %}Моя панель управления{% endblock %}
 
 {% block content %}
-<h1 class="msg-simple">Добро пожаловать на панель(управления)!</h1>
+    <h1 class="msg-simple">Добро пожаловать на панель(управления)!</h1>
+    <a href="{% url 'pass-change' %}">Поменять пароль</a>
+    <a href="{% url 'pass-reset' %}">Забыли пароль?</a>
+    <a href="{% url 'edit-profile' %}">Редактировать профиль</a>
 {% endblock %}
