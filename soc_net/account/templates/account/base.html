@@ -14,7 +14,7 @@
         <div class="menu">
             {% if user.is_authenticated %}
                 <a href="{% url 'dashboard' %}">Панель</a>
-                <a href="#">Картинки</a>
+                <a href="{% url 'create-image' %}">Картинки</a>
                 <a href="#">Люди</a>
                 <span>Вы вошли как {{ user.first_name|default:user.username }}</span>
                 <a href="{% url 'logout' %}">Выйти</a>

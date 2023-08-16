@@ -1,0 +1,13 @@
+{% extends 'account/base.html' %}
+
+{% block title %}Добавить изображение{% endblock %}
+
+{% block content %}
+<h1 class="msg-simple">Введите даннын изображения</h1>
+<img src="{{ request.GET.url }}" alt="" width="400">
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Сохранить">
+</form>
+{% endblock %}
