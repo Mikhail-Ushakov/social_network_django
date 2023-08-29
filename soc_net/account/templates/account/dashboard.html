@@ -1,4 +1,5 @@
 {% extends 'account/base.html' %}
+{% load lst_img_tags %}
 
 {% block title %}Моя панель управления{% endblock %}
 
@@ -7,4 +8,10 @@
     <a href="{% url 'pass-change' %}">Поменять пароль</a>
     <a href="{% url 'pass-reset' %}">Забыли пароль?</a>
     <a href="{% url 'edit-profile' %}">Редактировать профиль</a>
+    <h1 class="msg-simple">Ссылка для букмарклета &gt;&gt; <a class="link-bookm" href="javascript:{% include 'bkmrl_launch.js' %}">DO IT</a></h1>
+    <!-- <h1 class="msg-simple">не работает=( Ссылка для darkmode &gt;&gt; <a class="link-bookm" href="javascript:{% include 'dark_theme.js' %}">DARKMODE</a></h1> -->
+    <h1 class="msg-simple"> <a href="{% url 'create-image' %}">Загрузить новое изображение</a></h1>
+    <h1 class="msg-simple" style="text-align: center;">Ваши добавленные изображения</h1>
+    {% list_images_tag user %}
+
 {% endblock %}

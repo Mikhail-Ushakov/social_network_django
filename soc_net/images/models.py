@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 class ImageModel(models.Model):
@@ -8,7 +9,7 @@ class ImageModel(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     url = models.URLField(max_length=2000)
-    image = models.ImageField(upload_to='image_added/')
+    image = models.ImageField(upload_to='image_added/', default='image_added/default.jpg')
     created = models.DateField(auto_now_add=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='images_liked', blank=True)
 
@@ -26,3 +27,6 @@ class ImageModel(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('detail-image', args=[self.slug])

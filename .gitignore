@@ -1,4 +1,7 @@
 env
 soc_net/db.sqlite3
+soc_net/cert.crt
+soc_net/cert.key
 soc_net/account/__pycache__
 soc_net/config/__pycache__
+soc_net/images/__pycache__

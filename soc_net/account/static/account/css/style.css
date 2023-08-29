@@ -1,23 +1,24 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    height: 10%;
-    background-color: deepskyblue;
+    height: 10vh;
+    background-color: rgb(225, 146, 0);
     font-size: 2em;
     color: white;
     align-items: center;
 }
 body {
     margin: 0;
-    background-color: lightcyan;
-    height: 100vh;
+    background-color: purple;
+    min-height: 100vh;
+    /* height: 100%; */
 }
 .footer{
-    height: 8%;
+    height: 8vh;
     text-align: center;
     background-color: lightslategray;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
     width: 100%;
 }
 .footer-text{
@@ -26,7 +27,7 @@ body {
 }
 
 .msg-simple {
-    color: rgb(18, 17, 36);
+    color: yellow;
 }
 
 .msg-error {
@@ -37,13 +38,38 @@ body {
     color: green;
 }
 
-.main a {
+
+a {
     text-decoration: none;
+    color: white;
+}
+.main a {
+    font-size: 1.5em;
     border: rgb(255, 123, 0) solid 1px;
 }
 
 .navbar a {
-    text-decoration: none;
     border: white solid 1px;
 }
 
+.link-bookm {
+    padding: 0.23em;
+}
+.main {
+    height: 100%;
+}
+
+.list-images {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.image-box {
+    margin: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

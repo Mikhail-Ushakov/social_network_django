@@ -5,9 +5,22 @@
 {% block content %}
 <h1 class="msg-simple">Введите даннын изображения</h1>
 <img src="{{ request.GET.url }}" alt="" width="400">
-<form action="" method="post">
+<h1 class="msg-error">{{ form.errors }}</h1>
+
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <p> <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>{{ form.title }}</p>  <!-- Можно сделать циклом -->
+    <p>{{ form.description }}</p>
+    <p>{{ form.url }}</p>
+
+    {% if not request.GET %}
+        <p>{{ form.image }}</p>
+    {% else %}
+    {% endif %}
+
     <input type="submit" value="Сохранить">
 </form>
+
+
 {% endblock %}

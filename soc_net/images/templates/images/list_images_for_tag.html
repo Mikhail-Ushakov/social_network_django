@@ -1,0 +1,16 @@
+{% load thumbnail %}
+<div class="list-images">
+    {% for image in images %}
+        <div class="image-box">
+            <a href="{% url 'detail-image' image.slug %}">
+                <img src="{% thumbnail image.image 300x300 crop='smart' %}" alt="">
+                <p class="msg-simple">{{ image.title }}</p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% if not is_user %}
+    {% if images.has_previous %}<a href="?page={{ images.previous_page_number }}">Назад</a>{% endif %}
+    <p class="msg-simple">Страница {{images.number}} из {{ images.paginator.num_pages }}</p>
+    {% if images.has_next %}<a href="?page={{images.next_page_number}}">Вперед</a>{% endif %}
+{% endif %}
