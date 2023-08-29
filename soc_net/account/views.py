@@ -1,9 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import (LoginView, LogoutView, PasswordChangeView, 
                                        PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView,
                                        PasswordResetCompleteView, PasswordResetConfirmView)
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
+from django.contrib.auth.models import User
 from .models import Profile
 from .forms import RegistrationForm, EditProfileForm, EditUserForm
 
@@ -76,3 +78,16 @@ def edit_profile(request):
         user_form = EditUserForm(instance=request.user)
         profile_form = EditProfileForm(instance=request.user.profile)
     return render(request, 'account/edit_profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+@login_required
+def users_list(request):
+    users = User.objects.filter(is_active=True)
+    return render(request, 'account/users_list.html', {'users': users})
+
+@login_required
+def user_detail(request, user_name):
+    select_user = User.objects.filter(username=user_name, is_active=True)[0] #лучше get object or 404 использовать 
+    if select_user == request.user:
+        return HttpResponseRedirect(reverse('dashboard'))
+    return render(request, 'account/user_detail.html', {'select_user': select_user})
