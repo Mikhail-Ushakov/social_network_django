@@ -3,7 +3,7 @@
 {% block title %}list images{% endblock %}
 
 {% block content %}
-
+<h1 class="msg-simple">Самое популярное изображение на данный момент <a href="{{ most_populate_obj.get_absolute_url }}">{{ most_populate_obj.title }}</a></h1>
 {% list_images_tag page=page %}
 
 {% endblock %}

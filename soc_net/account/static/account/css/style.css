@@ -1,3 +1,6 @@
+html{
+    overflow-x: hidden;
+}
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -72,4 +75,23 @@ a {
     flex-direction: column;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+
+
+.side-actions {
+    display: flex;
+    flex-direction: column;
+    width: 2vw;
+    background-color: rgb(195, 0, 195);
+    position: fixed;
+    right: 0;
+    top: 10vh;
+    height: 2vh;
+    font-size: 0.2em;
+}
+.side-actions:hover {
+    height: auto;
+    width: 20vw;
+    font-size: 1em;
 }

@@ -14,6 +14,7 @@
 {% with total_likes=image.likes.count users_like=image.likes.all %}
 
 <h1 class="msg-simple" >{{ total_likes }} like{{ total_likes|pluralize }}</h1>
+<h1 class="msg-simple" >{{ total_views }} view{{ total_views|pluralize }}</h1>
 
 <form action="{% url 'like-image' image.id %}" method="post">
     {% csrf_token %}

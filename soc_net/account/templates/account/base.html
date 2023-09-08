@@ -16,6 +16,7 @@
                 <a href="{% url 'dashboard' %}">Панель</a>
                 <a href="{% url 'list-images' %}">Картинки</a>
                 <a href="{% url 'users-list' %}">Люди</a>
+                <a href="{% url 'chat' %}">Чат</a>
                 <span>Вы вошли как {{ user.first_name|default:user.username }}</span>
                 <a href="{% url 'logout' %}">Выйти</a>
             {% else %}

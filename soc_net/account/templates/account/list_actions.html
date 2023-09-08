@@ -1,0 +1,23 @@
+{% load thumbnail %}
+
+<div class="item-action">
+    {% with profile=action.user.profile user=action.user %}
+    <a href="{{ user.get_absolute_url }}">
+        {% if profile.photo %}
+        <img src="{% thumbnail profile.photo 80x80 crop='100%' %}" alt="{{ user.get_full_name }}">
+        {% endif %}
+        <span>{{ user.first_name|default:user.username }} {{ action.verb }}
+            {% endwith %}
+            {% if action.target %}
+            {% with target=action.target %}
+            <a href="{{ target.get_absolute_url }}">{{ target }}</a>
+            {% endwith %}
+            {% endif %}
+        </span>
+    </a>
+    <p>{{ action.created|timesince }} ago</p>
+    
+    
+    
+
+</div>

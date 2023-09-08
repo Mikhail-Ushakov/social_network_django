@@ -13,6 +13,7 @@ urlpatterns = [
     path('registration/', views.registr, name='registration'),
     path('edit/', views.edit_profile, name='edit-profile'),
     path('users/<user_name>/', views.user_detail, name='user-detail'),
+    path('subscribe/<int:user_id>/<action>/', views.subscribe, name='subscribe'),
     path('users/', views.users_list, name='users-list'),
     path('', views.dashboard, name='dashboard'),
 ]

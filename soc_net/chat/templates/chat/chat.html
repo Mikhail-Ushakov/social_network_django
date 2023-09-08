@@ -1,0 +1,18 @@
+{% extends 'account/base.html' %}
+
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send">
+</form>
+{% for msg in messeges %}
+    <div class="image-box">
+        <p class="msg-simple">{{ msg.user }}</p>
+        <h1 class="msg-simple">{{ msg.messege }}</h1>
+        <p>{{ msg.created|timesince }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

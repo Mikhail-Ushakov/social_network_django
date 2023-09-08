@@ -12,6 +12,11 @@
     <!-- <h1 class="msg-simple">не работает=( Ссылка для darkmode &gt;&gt; <a class="link-bookm" href="javascript:{% include 'dark_theme.js' %}">DARKMODE</a></h1> -->
     <h1 class="msg-simple"> <a href="{% url 'create-image' %}">Загрузить новое изображение</a></h1>
     <h1 class="msg-simple" style="text-align: center;">Ваши добавленные изображения</h1>
+    <div class="side-actions">
+        {% for action in actions %}
+            {% include 'account/list_actions.html' %}
+        {% endfor %}
+    </div>
     {% list_images_tag user %}
 
 {% endblock %}

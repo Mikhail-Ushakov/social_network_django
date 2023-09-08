@@ -5,11 +5,16 @@ from django.utils.text import slugify
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect
 from django.views.decorators.http import require_POST
+
 import requests
+import redis
 
 from .models import ImageModel
 from .forms import ImageForm
+from actions.utils import create_action
 
+
+redis_client = redis.Redis()
 
 @login_required
 def create_image(request):
@@ -32,6 +37,7 @@ def create_image(request):
                 image.image.save(full_name, ContentFile(response.content), save=False)
             
             image.save()
+            create_action(request.user, 'add image', image)
             return HttpResponseRedirect(reverse('detail-image', args=[image.slug]))
 
     else:
@@ -42,7 +48,9 @@ def create_image(request):
 @login_required
 def image_detail(request, slug):
     image = get_object_or_404(ImageModel, slug=slug)
-    return render(request, 'images/detail_image.html', {'image': image})
+    total_views = redis_client.incr(f'image:{image.id}')
+    redis_client.zincrby('image:rank', 1, image.id)
+    return render(request, 'images/detail_image.html', {'image': image, 'total_views': total_views})
 
 @login_required
 @require_POST
@@ -53,9 +61,12 @@ def image_like(request, id):
         image.likes.remove(request.user)
     else:
         image.likes.add(request.user)
+        create_action(request.user, 'likes', image)
     return HttpResponseRedirect(reverse('detail-image', args=[image.slug]))
 
 @login_required
 def image_list(request):
     page = request.GET.get('page')
-    return render(request, 'images/list_images.html', {'page': page})
+    most_populate_id = redis_client.zrange('image:rank', 0, -1, desc=True)[0]
+    most_populate_obj = ImageModel.objects.filter(id=most_populate_id)[0]
+    return render(request, 'images/list_images.html', {'page': page, 'most_populate_obj': most_populate_obj})

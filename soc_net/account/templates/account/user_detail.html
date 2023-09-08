@@ -3,7 +3,7 @@
 {% load lst_img_tags %}
 
 
-{% block title %}{{select_user.first_name}}{% endblock %}
+{% block title %} {{ select_user.first_name }} {% endblock %}
 
 {% block content %}
 
@@ -14,15 +14,20 @@
     {% with total_followers=select_user.followers.count %}
    
         <span class="msg-simple">{{ total_followers }} follower{{ total_followers|pluralize }}</span>
-        
-        <a href="#" data-id="{{ select_user.id }}" data-action="{% if request.user in select_user.followers.all %}un{% endif %}follow" class="follow button">
+       
+        {% if request.user not in select_user.followers.all %}
+            <form action="{% url 'subscribe' select_user.id 'follow' %}" method="post" >
+                {% csrf_token %}
+                <input type="submit" value="Follow" >
+            </form>
+        {% else %}
+            <form action="{% url 'subscribe' select_user.id 'unfollow' %}" method="post" >
+                {% csrf_token %}
+                <input type="submit" value="Unfollow" >
+            </form>
+        {% endif %}
 
-            {% if request.user not in select_user.followers.all %}
-                Follow
-            {% else %}
-                Unfollow
-            {% endif %}
-        </a>
+    
 
         <div class="list-images">
             {% list_images_tag select_user %}
